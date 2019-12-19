@@ -1,0 +1,7 @@
+{
+    "tableName": "tanjapollDDB",
+    "partitionKeyName": "partitionKey",
+    "partitionKeyType": "S",
+    "sortKeyName": "sortKey",
+    "sortKeyType": "S"
+}
