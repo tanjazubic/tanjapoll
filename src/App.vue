@@ -53,7 +53,7 @@
     },
     created () {
       this.updateVotes()
-      setInterval(this.updateVotes, 3000)
+      setInterval(this.updateVotes, 99999999)
     }
   }
   </script>
