@@ -39,18 +39,7 @@
       }
     },
     methods: {
-
-      AmplifyEventBus.$on('authState', info => {
-      if (info === 'signedIn') {
-        this.signedIn = true
-        this.$router.push('/profile')
-      }
-      if (info === 'signedOut') {
-        this.$router.push('/auth')
-        this.signedIn = false
-      }
-    }
-
+      
       vote: async function (vote) {
         const init = {
           queryStringParameters: {
