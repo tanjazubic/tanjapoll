@@ -33,17 +33,11 @@
     name: 'app',
     data() {
       return {
+        user: {},
         apiName: 'tanjapollAPI',
         votesYes: 0,
         votesNo: 0
       }
-    },
-    beforeCreate() {
-    Auth.currentAuthenticatedUser()
-      .then(user => {
-        this.user = user
-      })
-      .catch(() => console.log('not signed in...'))
     },
     methods: {
       
