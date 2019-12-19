@@ -38,6 +38,13 @@
         votesNo: 0
       }
     },
+    beforeCreate() {
+    Auth.currentAuthenticatedUser()
+      .then(user => {
+        this.user = user
+      })
+      .catch(() => console.log('not signed in...'))
+    },
     methods: {
       
       vote: async function (vote) {
