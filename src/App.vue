@@ -26,6 +26,9 @@
 
 <script>
   import { API } from 'aws-amplify'
+  import { Auth } from 'aws-amplify'
+  import { AmplifyEventBus } from 'aws-amplify-vue'
+
   export default {
     name: 'app',
     data() {
@@ -36,6 +39,18 @@
       }
     },
     methods: {
+
+      AmplifyEventBus.$on('authState', info => {
+      if (info === 'signedIn') {
+        this.signedIn = true
+        this.$router.push('/profile')
+      }
+      if (info === 'signedOut') {
+        this.$router.push('/auth')
+        this.signedIn = false
+      }
+    }
+
       vote: async function (vote) {
         const init = {
           queryStringParameters: {
