@@ -10,6 +10,11 @@
             "StackName": "amplify-tanjapoll-master-101246",
             "StackId": "arn:aws:cloudformation:eu-west-1:482507801868:stack/amplify-tanjapoll-master-101246/77ecc0b0-223f-11ea-a048-02e29081c656",
             "AmplifyAppId": "d1zpfocz97eipu"
+        },
+        "categories": {
+            "auth": {
+                "tanjapolle290e9c6": {}
+            }
         }
     }
 }

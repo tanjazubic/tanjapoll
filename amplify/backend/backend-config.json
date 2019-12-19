@@ -37,5 +37,12 @@
 				}
 			]
 		}
+	},
+	"auth": {
+		"tanjapolle290e9c6": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
+		}
 	}
 }
