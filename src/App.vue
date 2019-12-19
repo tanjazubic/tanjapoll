@@ -1,8 +1,11 @@
 <template>
+    <div>
+        <h4>Sign in / sign up: </h4>
+        <amplify-authenticator></amplify-authenticator>
+        {{signedIn}}
+        <div>
   <div id="app" class="hello">
 <h1>Welcome to the Serverless Voting App. Now with Amplify!</h1>
-      <h4>Sign in / sign up: </h4>
-      <amplify-authenticator></amplify-authenticator>
       <h4>You can vote as many times as you like. Click away!</h4>
 <b-row align-h="center" class="mt-5">
       <b-card-group deck>
@@ -20,6 +23,7 @@
     </b-row>
     <b-row align-h="center" class="mt-5">
       <p>Questions? Ask James <a href="https://twitter.com/jbesw">@jbesw</a>.</p>
+      <amplify-sign-out></amplify-sign-out>
     </b-row>
   </div>  
 </template>
@@ -31,6 +35,10 @@
 
   export default {
     name: 'app',
+    props: {
+      msg: String,
+      signedIn : false
+    },
     data() {
       return {
         user: {},
@@ -39,7 +47,19 @@
         votesNo: 0
       }
     },
+    
+
     methods: {
+
+      findUser: async function() {
+        try {
+          const user = await Auth.currentAuthenticatedUser();
+          this.signedIn = true,
+          console.log(user);
+        } catch (err) {
+          this.signedIn = false
+        }
+      },
       
       vote: async function (vote) {
         const init = {
@@ -58,6 +78,16 @@
       }
     },
     created () {
+      this.findUser();
+
+      AmplifyEventBus.$on('authState', info => {
+        if (info === "signedIn") {
+          this.findUser();
+        } else {
+          this.signedIn = false;
+        }
+      });
+
       this.updateVotes()
       setInterval(this.updateVotes, 99999999)
     }
