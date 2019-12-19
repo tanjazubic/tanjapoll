@@ -27,16 +27,32 @@
 
   <script>
 import { API } from 'aws-amplify'
+import { Auth } from 'aws-amplify'
+
+
 export default {
   name: 'app',
   data() {
     return {
+      signedIn: false,
       apiName: 'tanjapollAPI',
       votesYes: 0,
       votesNo: 0
     }
   },
   methods: {
+
+    findUser: async function () {
+      AmplifyEventBus.$on('authState', info => {
+        if (info === 'signedIn') {
+          this.signedIn = true
+        }
+        if (info === 'signedOut') {
+          this.signedIn = false
+        }
+      })
+    },
+
     vote: async function (vote) {
       const init = {
         queryStringParameters: {
@@ -54,8 +70,10 @@ export default {
     }
   },
   created () {
-    this.updateVotes()
-    setInterval(this.updateVotes, 9999999999)
+    if (signedIn) {
+      this.updateVotes()
+      setInterval(this.updateVotes, 9999999999)
+    }
   }
 }
 </script>
