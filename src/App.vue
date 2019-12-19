@@ -30,7 +30,7 @@
     name: 'app',
     data() {
       return {
-        apiName: 'pollCounterAPI',
+        apiName: 'tanjapollAPI',
         votesYes: 0,
         votesNo: 0
       }
