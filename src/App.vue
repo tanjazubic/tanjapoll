@@ -1,10 +1,8 @@
 <template>
-    <div>
-        <amplify-authenticator></amplify-authenticator>
-      </div>
     <div id="app" class="hello">
   <h1>Welcome to the Serverless Voting App. Now with Amplify!</h1>
-        <h4>Click to vote on this very important issue.</h4>
+        <h4>Sign up or sign in:</h4>
+        <amplify-authenticator></amplify-authenticator>
         <h4>You can vote as many times as you like. Click away!</h4>
   <b-row align-h="center" class="mt-5">
         <b-card-group deck>
