@@ -27,7 +27,7 @@
 
   <script>
 import { API } from 'aws-amplify'
-import { Auth } from 'aws-amplify'
+import { AmplifyEventBus } from 'aws-amplify-vue';
 
 export default {
   name: 'app',
@@ -69,7 +69,7 @@ export default {
     }
   },
   created () {
-    if (signedIn) {
+    if (signedIn == true ) {
       this.updateVotes()
       setInterval(this.updateVotes, 9999999999) 
       }
