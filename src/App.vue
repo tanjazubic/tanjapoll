@@ -55,10 +55,7 @@ export default {
       const { username, password } = this.form
       await Auth.signIn(username, password)
       AmplifyEventBus.$emit('authState', 'signedIn')
-      this.signed = true
-    },
 
-    findUser: async function () {
       AmplifyEventBus.$on('authState', info => {
         if (info === 'signedIn') {
           this.signedIn = true
@@ -66,7 +63,24 @@ export default {
         if (info === 'signedOut') {
           this.signedIn = false
         }
+        this.signed = true
+      })},
+
+    findUser: async function () {
+      AmplifyEventBus.$on('authState', info => {
+      if (info === 'signedIn') {
+        this.signedIn = true
+      }
+      if (info === 'signedOut') {
+        this.signedIn = false
+      }
+    });
+
+    Auth.currentAuthenticatedUser()
+      .then(user => {
+        this.signedIn = true
       })
+      .catch(() => this.signedIn = false)
     },
 
     vote: async function (vote) {
