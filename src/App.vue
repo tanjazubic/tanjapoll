@@ -33,7 +33,12 @@ export default {
   name: 'app',
   data() {
     return {
+      signed: false,
       signedIn: false,
+      form: {
+        username: '',
+        password: ''
+      },
       apiName: 'tanjapollAPI',
       votesYes: 0,
       votesNo: 0
@@ -41,9 +46,15 @@ export default {
   },
   methods: {
 
+    async signIn() {
+      const { username, password } = this.form
+      await Auth.signIn(username, password)
+      AmplifyEventBus.$emit('authState', 'signedIn')
+      this.signed = true
+    },
+
     findUser: async function () {
       AmplifyEventBus.$on('authState', info => {
-        console.log(info)
         if (info === 'signedIn') {
           this.signedIn = true
         }
@@ -70,8 +81,7 @@ export default {
     }
   },
   created () {
-    if (this.signedIn == true ) {
-      console.log(this.signedIn)
+    if (this.signed == true ) {
       this.updateVotes()
       setInterval(this.updateVotes, 9999999999) 
       }
