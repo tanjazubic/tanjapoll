@@ -51,6 +51,13 @@ export default {
   },
   methods: {
 
+    async signIn() {
+      const { username, password } = this.form
+      await Auth.signIn(username, password)
+      AmplifyEventBus.$emit('authState', 'signedIn')
+      this.signed = true
+    },
+
     findUser: async function () {
       AmplifyEventBus.$on('authState', info => {
         if (info === 'signedIn') {
@@ -79,12 +86,10 @@ export default {
     }
   },
   created () {
-      const { username, password } = this.form
-      await Auth.signIn(username, password)
-      AmplifyEventBus.$emit('authState', 'signedIn')
-      this.signed = true
+    if (this.signed == true ) {
       this.updateVotes()
-      setInterval(this.updateVotes, 9999999999)
+      setInterval(this.updateVotes, 9999999999) 
+      }
   }
 }
 </script>
