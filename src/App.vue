@@ -2,10 +2,8 @@
     <div id="app" class="hello">
   <h1>Welcome to the Serverless Voting App. Now with Amplify!</h1>
     <h2>Sign In</h2>
-    <div class='formcontainer'>
-      <input v-model='form.username' class='input' />
-      <input type='password' v-model='form.password' class='input' />
-      <button v-on:click='signIn' class='button'>Sign In</button>
+    <div class='auth'>
+        <amplify-authenticator></amplify-authenticator>
     </div>
         <h4>You can vote as many times as you like. Click away!</h4>
   <b-row align-h="center" class="mt-5">
@@ -30,61 +28,22 @@
   </template>
 
   <script>
-import { API } from 'aws-amplify'
-import { AmplifyEventBus } from 'aws-amplify-vue'
-import { Auth } from 'aws-amplify'
+import { API } from 'aws-amplify';
+import { AmplifyEventBus } from 'aws-amplify-vue';
+import { Auth } from 'aws-amplify';
+import  Authenticator from 'aws-amplify-vue';
 
 export default {
   name: 'app',
   data() {
     return {
-      uu,
-      signed: false,
       signedIn: false,
-      form: {
-        username: '',
-        password: ''
-      },
       apiName: 'tanjapollAPI',
       votesYes: 0,
       votesNo: 0
     }
   },
   methods: {
-
-    async signIn() {
-      const { username, password } = this.form
-      await Auth.signIn(username, password)
-      AmplifyEventBus.$emit('authState', 'signedIn')
-
-      AmplifyEventBus.$on('authState', info => {
-        if (info === 'signedIn') {
-          this.signedIn = true
-        }
-        if (info === 'signedOut') {
-          this.signedIn = false
-        }
-        this.signed = true
-      })},
-
-    findUser: async function () {
-      AmplifyEventBus.$on('authState', info => {
-      if (info === 'signedIn') {
-        this.signedIn = true
-      }
-      if (info === 'signedOut') {
-        this.signedIn = false
-      }
-    });
-
-    Auth.currentAuthenticatedUser()
-      .then(user => {
-        this.uu = user
-        this.signedIn = true
-      })
-      .catch(() => this.signedIn = false)
-    },
-
     vote: async function (vote) {
       const init = {
         queryStringParameters: {
@@ -99,14 +58,27 @@ export default {
       const response = await API.get(this.apiName, '/votes/poll-001')
       this.votesNo = response[0].votesNo
       this.votesYes = response[0].votesYes    
+    },
+    async isUserSignedIn(){
+      try {
+        const userObj = await Auth.currentAuthenticatedUser();
+        this.signedIn = true;
+      } catch (error) {
+        this.signedIn = false;
     }
   },
   created () {
-    if (this.signed == true ) {
       this.updateVotes()
       setInterval(this.updateVotes, 9999999999) 
+      this.isUserSignedIn();
+    AmplifyEventBus.$on('authState', info =>{
+      if (info === "signedIn") {
+        this.signedIn = true;
+      }else{
+        this.signedIn = false;
       }
-  }
+    });
+  },
 }
 </script>
 
