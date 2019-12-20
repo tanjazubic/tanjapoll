@@ -43,6 +43,7 @@ export default {
 
     findUser: async function () {
       AmplifyEventBus.$on('authState', info => {
+        console.log(info)
         if (info === 'signedIn') {
           this.signedIn = true
         }
@@ -70,6 +71,7 @@ export default {
   },
   created () {
     if (this.signedIn == true ) {
+      console.log(this.signedIn)
       this.updateVotes()
       setInterval(this.updateVotes, 9999999999) 
       }
