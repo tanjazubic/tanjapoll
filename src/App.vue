@@ -38,6 +38,7 @@ export default {
   name: 'app',
   data() {
     return {
+      uu,
       signed: false,
       signedIn: false,
       form: {
@@ -78,6 +79,7 @@ export default {
 
     Auth.currentAuthenticatedUser()
       .then(user => {
+        this.uu = user
         this.signedIn = true
       })
       .catch(() => this.signedIn = false)
