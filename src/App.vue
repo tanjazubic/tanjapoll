@@ -71,14 +71,15 @@ export default {
       this.updateVotes()
       setInterval(this.updateVotes, 9999999999) 
       this.isUserSignedIn();
-    AmplifyEventBus.$on('authState', info =>{
-      if (info === "signedIn") {
-        this.signedIn = true;
-      }else{
-        this.signedIn = false;
-      }
-    });
+      AmplifyEventBus.$on('authState', info => {
+        if (info === "signedIn") {
+          this.signedIn = true;
+        } else {
+          this.signedIn = false;
+        }
+      })
   },
+  
 }
 </script>
 
