@@ -62,7 +62,7 @@ export default {
       try {
         const userObj = await Auth.currentAuthenticatedUser();
         this.signedIn = true;
-        console.log("MD: [isUserSignedIn] Current user:" + JSON.stringify(userObj));
+        const a = JSON.stringify(userObj);
       } catch (error) {
         this.signedIn = false;
     }
