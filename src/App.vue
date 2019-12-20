@@ -78,8 +78,7 @@ export default {
           this.signedIn = false;
         }
       })
-  },
-  
+  }
 }
 </script>
 
