@@ -31,7 +31,6 @@
 import { API } from 'aws-amplify';
 import { AmplifyEventBus } from 'aws-amplify-vue';
 import { Auth } from 'aws-amplify';
-import  Authenticator from 'aws-amplify-vue';
 
 export default {
   name: 'app',
@@ -63,6 +62,7 @@ export default {
       try {
         const userObj = await Auth.currentAuthenticatedUser();
         this.signedIn = true;
+        console.log("MD: [isUserSignedIn] Current user:" + JSON.stringify(userObj));
       } catch (error) {
         this.signedIn = false;
     }
