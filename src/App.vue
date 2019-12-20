@@ -69,7 +69,7 @@ export default {
     }
   },
   created () {
-    if (signedIn == true ) {
+    if (this.signedIn == true ) {
       this.updateVotes()
       setInterval(this.updateVotes, 9999999999) 
       }
