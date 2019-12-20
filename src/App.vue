@@ -1,8 +1,12 @@
 <template>
     <div id="app" class="hello">
   <h1>Welcome to the Serverless Voting App. Now with Amplify!</h1>
-        <h4>Sign up or sign in:</h4>
-        <amplify-authenticator></amplify-authenticator>
+    <h2>Sign In</h2>
+    <div class='formcontainer'>
+      <input v-model='form.username' class='input' />
+      <input type='password' v-model='form.password' class='input' />
+      <button v-on:click='signIn' class='button'>Sign In</button>
+    </div>
         <h4>You can vote as many times as you like. Click away!</h4>
   <b-row align-h="center" class="mt-5">
         <b-card-group deck>
