@@ -27,7 +27,8 @@
 
   <script>
 import { API } from 'aws-amplify'
-import { AmplifyEventBus } from 'aws-amplify-vue';
+import { AmplifyEventBus } from 'aws-amplify-vue'
+import { Auth } from 'aws-amplify'
 
 export default {
   name: 'app',
