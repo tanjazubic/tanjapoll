@@ -5,13 +5,15 @@ import { AmplifyPlugin } from 'aws-amplify-vue'
 import awsmobile from './aws-exports'
 
 Amplify.configure(awsmobile)
+Vue.use(AmplifyPlugin, AmplifyModules)
 
 import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-Vue.use(BootstrapVue)
-Vue.use(AmplifyPlugin, AmplifyModules)
+
+
 Vue.config.productionTip = false
 
 new Vue({
