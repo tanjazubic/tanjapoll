@@ -1,3 +1,4 @@
+<eslint-disable></eslint-disable>
 <template>
     <div id="app" class="hello">
   <h1>Welcome to the Serverless Voting App. Now with Amplify!</h1>
