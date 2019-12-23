@@ -1,4 +1,4 @@
-<eslint-disable></eslint-disable>
+<eslint-disable>
 <template>
     <div id="app" class="hello">
   <h1>Welcome to the Serverless Voting App. Now with Amplify!</h1>
@@ -27,6 +27,7 @@
       <amplify-sign-out></amplify-sign-out>
     </div>  
   </template>
+</eslint-disable>
 
   <script>
 import { API } from 'aws-amplify';
